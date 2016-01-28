@@ -7,12 +7,25 @@
     <link type="text/css" rel="stylesheet" href="css/mediaplayer.css"/>
 </head>
 <body>
-<div id="play_wrap" data-src="demo.mp3" class="play_wrap">
+<div id="play_wrap" data-src="http://www.itinge.com/music/1/201412/2014121612344616350726.mp3" class="play_wrap">
 </div>
 <script type="text/javascript" src="js/MediaPlayer.js"></script>
 <script type="text/javascript">
-    new MediaPlayer("play_wrap");
-
+    new MediaPlayer("play_wrap",{
+        loop:true
+    });
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+                };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);
 </script>
 </body>
 </html>
